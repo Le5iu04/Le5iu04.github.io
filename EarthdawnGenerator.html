@@ -1,0 +1,423 @@
+<html>
+    <head>
+    <title>Generator</title>
+    <meta charset="utf-8">
+    <link href="styl.css" rel="stylesheet">
+    <link rel="icon" href="logo.png">
+    </head>
+        <body>
+            <div id="enemyGenerator">
+              <h1>Generator przeciwników Earthdawn</h1>
+              <button type="button" onclick="generate();">Generuj</button>
+              <p id="output"></p>
+            <script type="text/javascript">
+
+              var nazwaPool1 = Array(
+              "Straszliwy",
+              "Przerażający",
+              "Wielki",
+              "Trujący",
+              "Agresywny",
+              "Pełzający",
+              "Skalny",
+              "Lodowy",
+              "Ognisty",
+              "Latający",
+              "Nieumarły",
+              "Człapiący",
+              "Waleczny",
+              "Pancerny",
+              "Tajemniczy",
+              "Doskonały",
+              "Silny",
+              "Szybki",
+              "Niepokonany",
+              "Gnijący",
+              "Beznogi",
+              "Uzbrojony",
+              "Nieustraszony",
+              "Topniejący",
+              "Ropiejący",
+              "Kopiący",
+              "Kolczasty",
+              "Magiczny",
+              "Splugawiony",
+              "Świecący",
+              "Szarżujący",
+              "Wierzgający",
+              "Ostronożny",
+              "Tęgi",
+              "Wielogłowy",
+              "Dwugłowy",
+              "Czteronożny",
+              "Fluorescencyjny",
+              "Morski",
+              "Szkarłatny",
+              "Zmiennokształtny",
+              "Przeklęty",
+              "Eteryczny",
+              "Astralny",
+              "Dziki",
+              "Mglisty",
+              "Międzywymiarowy",
+              "Przerośnięty",
+              "Zarośnięty bluszczem",
+              "Toksyczny",
+              "Krwawy",
+              "Metaliczny",
+              "Nienaturalny",
+              "Zabójczy",
+              "Wzmocniony",
+              "Zaklęty",
+              "Chitynowy",
+              "Bagienny",
+              "Podniebny",
+              "Jaskiniowy",
+              "Nocny",
+              "Mroczny"
+          );
+
+          var nazwaPool2 = Array(
+              "pająk",
+              "stawonóg",
+              "troll",
+              "ork",
+              "obsydianin",
+              "wietrzniak",
+              "elf",
+              "człowiek",
+              "t'skrang",
+              "krasnolud",
+              "skorupiak",
+              "rekin",
+              "krab",
+              "szkielet",
+              "kapitan",
+              "wojownik",
+              "strzelec",
+              "pomiot",
+              "rycerz",
+              "złodziej",
+              "łupieżca",
+              "zębacz",
+              "przedmiot",
+              "glut",
+              "ptak",
+              "wilk",
+              "żółw",
+              "czarownik",
+              "czarnoksiężnik",
+              "smok",
+              "strażnik",
+              "obrońca",
+              "wąż",
+              "niedźwiedź",
+              "pijawek",
+              "bluszcz",
+              "koń",
+              "nosorożec",
+              "żywiołak",
+              "glizd",
+              "wijec",
+              "szympans",
+              "golem",
+              "drzewiec",
+              "pnączak",
+              "humanoid",
+              "grzyb",
+              "Węgorz",
+              "bizon",
+              "moloch",
+              "aligator",
+              "cień",
+              "tytan",
+              "goblin",
+              "wampir",
+              "wężo-człek",
+              "robal",
+              "duch",
+              "olbrzym",
+              "posąg",
+              "ghul",
+              "trupojad",
+              "cyklop",
+              "ogr",
+              "pełzacz",
+              "stonóg",
+              "wędrowiec",
+              "rozpruwacz",
+              "mackogłów",
+              "skalniak",
+              "skorpion",
+              "behemot",
+              "lewiatan",
+              "gryzak",
+              "kruk",
+              "szermierz"
+          );
+
+          var kosciPool = Array(
+              "k12",
+              "2k6",
+              "k8+k6",
+              "k10+k6",
+              "k10+k8",
+              "2k10",
+              "k12+k10",
+              "k20+k4",
+              "k20+k6"
+          );
+
+              function numberGenerate(min, max) {
+                return Math.random() * (max - min) + min;
+              }
+
+              function generate() {
+
+                var rand1 = nazwaPool1[Math.floor(Math.random()*nazwaPool1.length)];
+                var rand2 = nazwaPool2[Math.floor(Math.random()*nazwaPool2.length)];
+                var rand3 = kosciPool[Math.floor(Math.random()*kosciPool.length)];
+                var rand4 = kosciPool[Math.floor(Math.random()*kosciPool.length)];
+                var rand5 = Math.round(numberGenerate(5, 12));
+                var rand6 = Math.round(numberGenerate(5, 12));
+                var rand7 = Math.round(numberGenerate(5, 12));
+                var rand8 = Math.round(numberGenerate(0, 7));
+                var rand9 = Math.round(numberGenerate(24, 62));
+                var rand11 = Math.round(numberGenerate(0, 1));
+                var rand12 = Math.round(numberGenerate(20, 160));
+                var rand12andHalf = Math.ceil(rand12/2);
+                var rand13 = kosciPool[Math.floor(Math.random()*kosciPool.length)];
+                var rand14 = kosciPool[Math.floor(Math.random()*kosciPool.length)];
+
+
+                var nazwa = rand1 + " " + rand2;
+                var atak = rand3;
+                var obrazenia = rand4;
+                var obrFiz = rand5;
+                var obrMag = rand6;
+                var obrSpol = rand7;
+                var pancerz = rand8;
+                var pZycia = rand9;
+                var pPrzyt = Math.ceil((rand9/2) + (rand9/3));
+                var czary = rand11;
+                var predkosc = (rand12) + "/" + (rand12andHalf);
+                var tkanieWatkow = rand13;
+                var rzucanieCzarow = rand14;
+
+                if (czary == 0) {
+                  czary = "Nie";
+                } else if (czary == 1) {
+                  czary = "Tak";
+                }
+
+                if (czary == "Tak") {
+                  document.getElementById('output').innerHTML = nazwa + "<br> Atak: " + atak + "<br> Obrażenia: " + obrazenia + "<br> Obrona fizyczna: " + obrFiz + "<br> Obrona magiczna: " + obrMag + "<br> Obrona społeczna: " + obrSpol + "<br> Pancerz: " + pancerz + "<br> Próg życia: " + pZycia + "<br> Próg przytomności: " + pPrzyt + "<br> Czary: " + czary + "<br> Prędkość: " + predkosc + "<br> Tkanie wątków: " + tkanieWatkow + "<br> Rzucanie Czarów: " + rzucanieCzarow;
+                } else if (czary == "Nie") {
+                  document.getElementById('output').innerHTML = nazwa + "<br> Atak: " + atak + "<br> Obrażenia: " + obrazenia + "<br> Obrona fizyczna: " + obrFiz + "<br> Obrona magiczna: " + obrMag + "<br> Obrona społeczna: " + obrSpol + "<br> Pancerz: " + pancerz + "<br> Próg życia: " + pZycia + "<br> Próg przytomności: " + pPrzyt + "<br> Czary: " + czary + "<br> Prędkość: " + predkosc;
+                } else if (rand2 == "czarnoksiężnik" || rand2 == "czarownik") {
+                  document.getElementById('output').innerHTML = nazwa + "<br> Atak: " + atak + "<br> Obrażenia: " + obrazenia + "<br> Obrona fizyczna: " + obrFiz + "<br> Obrona magiczna: " + obrMag + "<br> Obrona społeczna: " + obrSpol + "<br> Pancerz: " + pancerz + "<br> Próg życia: " + pZycia + "<br> Próg przytomności: " + pPrzyt + "<br> Czary: " + czary + "<br> Prędkość: " + predkosc + "<br> Tkanie wątków: " + tkanieWatkow + "<br> Rzucanie Czarów: " + rzucanieCzarow;
+                }
+              }
+            </script>
+
+            <!--Koniec I skryptu-->
+
+            </div>
+            <div id="itemGenerator">
+              <h1>Generator przedmiotów Earthdawn</h1>
+              <button type="button" onclick="generate2();">Generuj</button>
+              <p id="itemOutput"></p>
+            <script type="text/javascript">
+
+              var nazwaPool3 = Array(
+              "Straszliwy",
+              "Ostry",
+              "Wielki",
+              "Trujący",
+              "Skalny",
+              "Lodowy",
+              "Ognisty",
+              "Latający",
+              "Pancerny",
+              "Tajemniczy",
+              "Doskonały",
+              "Gnijący",
+              "Topniejący",
+              "Ropiejący",
+              "Kolczasty",
+              "Magiczny",
+              "Splugawiony",
+              "Świecący",
+              "Fluorescencyjny",
+              "Morski",
+              "Szkarłatny",
+              "Przeklęty",
+              "Eteryczny",
+              "Astralny",
+              "Mglisty",
+              "Międzywymiarowy",
+              "Zarośnięty bluszczem",
+              "Toksyczny",
+              "Krwawy",
+              "Metaliczny",
+              "Nienaturalny",
+              "Zabójczy",
+              "Wzmocniony",
+              "Zaklęty",
+              "Chitynowy",
+              "Nocny",
+              "Mroczny",
+              "Wybuchowy",
+              "Eksplodujący",
+              "Ciężki",
+              "Dwuręczny",
+              "Stłuczony",
+              "Pęknięty",
+              "Płonący",
+              "Złoty",
+              "Srebrny",
+          );
+
+          var nazwaPool4 = Array(
+              "berdysz",
+              "bicz",
+              "głuszak",
+              "korbacz",
+              "kostur",
+              "miecz",
+              "młot",
+              "nóż",
+              "sztylet",
+              "topór",
+              "trójząb",
+              "łuk",
+              "kołczan",
+              "jastrzębiec",
+              "toporek",
+              "olej",
+              "pawęż",
+              "puklerz",
+              "kapelusz",
+              "płaszcz",
+              "świecznik",
+              "bandaż",
+              "eliksir",
+              "okład",
+              "kryształ",
+              "amulet",
+              "kaftan",
+              "pas",
+              "szal",
+              "bukłak",
+              "kielich",
+              "plecak",
+              "hak",
+              "worek",
+              "przyrząd",
+              "łańcuch",
+              "koc",
+              "kompas"
+          );
+
+          var nazwaPool5 = Array(
+              "zniszczenia",
+              "pożogi",
+              "luminescencji",
+              "dwuręczny",
+              "krótki",
+              "wietrzniacki",
+              "krasnoludzki",
+              "obsydiański",
+              "z Th'aal",
+              "z Throalu",
+              "czystki",
+              "wiatru",
+              "t'skrandzki",
+              "pogłosu",
+              "echa",
+              "porażenia",
+              "elficki",
+              "trollowy",
+              "splugawienia",
+              "poczwary",
+              "zgryzoty",
+              "człowieczeństwa",
+              "ożywienia",
+              "orzeźwienia",
+              "destrukcji",
+              "zagłady",
+              "spętania",
+              "z Dolny Mroku",
+              "z Krwawej Puszczy",
+              "rubinowy",
+              "szmaragdowy",
+              "diamentowy",
+              "znikania",
+              "kradzieży",
+              "blasku",
+              "smutku",
+              "wściekłości",
+              "ratunku"
+          );
+
+          var nazwaPool6 = Array(
+              "Leczenie",
+              "Podpalenie",
+              "Porażenie",
+              "Zamrożenie",
+              "Ogłuszenie",
+              "Zniknięcie",
+              "Usunięcie negatywnych efektów",
+              "Usunięcie chorób",
+              "Widzenie astralne",
+              "Przywołanie",
+              "Wizualny",
+              "Oślepienie",
+              "Brak",
+              "Prowadzenie do punktu magii",
+              "Ochrona przed ogniem",
+              "Ochrona przed mrozem",
+              "Ochrona przed truciznami",
+              "Ochrona przed magią",
+              "Rozproszenie magii",
+              "Uzależnienie od przedmiotu",
+              "Przekleństwo",
+              "Do użycia tylko w niektórych sytuacjach",
+              "Urojenia psychiczne",
+              "Zdrada - zmiana efektów pozytywnych na negatywne przedmiotu",
+              "Bonus do talentu: +1"
+          );
+
+              function numberGenerate(min, max) {
+                return Math.random() * (max - min) + min;
+              }
+
+              function generate2() {
+
+                var rand1 = nazwaPool3[Math.floor(Math.random()*nazwaPool3.length)];
+                var rand2 = nazwaPool4[Math.floor(Math.random()*nazwaPool4.length)];
+                var rand3 = nazwaPool5[Math.floor(Math.random()*nazwaPool5.length)];
+                var cena = Math.round(numberGenerate(10, 200));
+                var obrazenia = Math.round(numberGenerate(1, 12));
+                var minSF = Math.round(numberGenerate(4, 15));
+                var ciezar = Math.round(numberGenerate(0, 7));
+                var zasieg = Math.round(numberGenerate(3, 125));
+                var dodPancFiz = Math.round(numberGenerate(0, 5));
+                var dodPancMag = Math.round(numberGenerate(0, 3));
+                var dodObrSpol = Math.round(numberGenerate(0, 5));
+                var efekt = nazwaPool6[Math.floor(Math.random()*nazwaPool6.length)];
+                var czasDzialania = Math.round(numberGenerate(0, 10));
+                var nazwa = rand1 + " " + rand2 + " " + rand3;
+
+                if (rand2 == "berdysz" || rand2 == "bicz" || rand2 == "głuszak" || rand2 == "korbacz" || rand2 == "kostur" || rand2 == "miecz" || rand2 == "młot" || rand2 == "nóż" || rand2 == "sztylet" || rand2 == "topór" || rand2 == "trójząb" || rand2 == "łuk" || rand2 == "kołczan" || rand2 == "jastrzębiec" || rand2 == "toporek" || rand2 == "łańcuch" || rand2 == "hak") {
+                  document.getElementById('itemOutput').innerHTML = nazwa + "<br> Cena: " + cena + "<br> Stopień obrażeń: " + obrazenia + "<br> Minimalna Siła Fizyczna: " + minSF + "<br> Ciężar: " + ciezar + "<br> Zasięg: " + zasieg + "<br> Efekt: " + efekt;
+                } else if (rand2 == "pawęż" || rand2 == "puklerz"){
+                  document.getElementById('itemOutput').innerHTML = nazwa + "<br> Cena: " + cena + "<br> Minimalna Siła Fizyczna: " + minSF + "<br> Ciężar: " + ciezar + "<br> Dodatkowy pancerz fizyczny: " + dodPancFiz + "<br> Dodatkowy pancerz duchowy: " + dodPancMag + "<br> Efekt: " + efekt;
+                } else {
+                  document.getElementById('itemOutput').innerHTML = nazwa + "<br> Cena: " + cena + "<br> Ciężar: " + ciezar + "<br> Pancerz fizyczny: +" + dodPancFiz + "<br> Pancerz duchowy: +" + dodPancMag + "<br> Obrona społeczna: +" + dodObrSpol + "<br> Czas działania (Tury): " + czasDzialania + "<br> Efekt: " + efekt;
+                }
+              }
+            </script>
+            </div>
+        </body>
+</html>

@@ -1,0 +1,10 @@
+Nazwa
+Opis(wygląd, itp.)
+Atak
+Obrażenia
+Obrona fiz
+Obrona mag
+Obrona społ
+Czary
+
+Przycisk generuje każdy aspekt przeciwnika
