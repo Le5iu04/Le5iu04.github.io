@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Map Creator</title>
+    <style media="screen">
+      body {
+        font-size: 170%;
+        background: linear-gradient(blue, black) !important;
+        color: white;
+        font-family: font1;
+        text-align: center;
+        min-height: 150%
+      }
+    </style>
+    <link rel="stylesheet" href="../styl.css">
+    <link rel="icon" href="../logo.png">
+    <link rel="shortcut icon" href="../logo.png">
+    <script src="https://kit.fontawesome.com/d243d02f19.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="nav">
+      <p><a href="../EarthdawnGenerator/index.html">Generatory</a></p>
+      <p><a href="../EarthdawnMapCreator/index.html">Kreator map</a></p>
+      <p><a href="../EarthdawnSoundboard/index.html">Soundboard</a></p>
+    </div>
+    <h1>Kreator Map</h1>
+    <div id="grid">
+      <table id="tabl">
+        <!--Efekt Skryptu-->
+      </table>
+      <div id="icons">
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+        <br><br>
+        <i class="icon">P1</i>
+        <br><br>
+        <i class="icon">P2</i>
+        <br><br>
+        <i class="icon">P3</i>
+        <br><br>
+        <i class="icon">BN</i><i class="icon">BN</i><i class="icon">BN</i><i class="icon">BN</i><i class="icon">BN</i>
+        <br><br>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
+        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i><br><br>
+          <script>
+      var draggables = document.getElementsByClassName("icon");
+      var activeDraggable = null;
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+      for (var i = 0; i < draggables.length; i++) {
+        draggables[i].addEventListener("mousedown", function(event) {
+          activeDraggable = this;
+          event = event || window.event;
+          event.preventDefault();
+
+          pos3 = event.clientX;
+          pos4 = event.clientY;
+          document.addEventListener("mouseup", closeDragElement);
+          document.addEventListener("mousemove", elementDrag);
+        });
+      }
+
+      function elementDrag(event) {
+        event = event || window.event;
+        event.preventDefault();
+
+        pos1 = pos3 - event.clientX;
+        pos2 = pos4 - event.clientY;
+        pos3 = event.clientX;
+        pos4 = event.clientY;
+
+        activeDraggable.style.top = (activeDraggable.offsetTop - pos2) + "px";
+        activeDraggable.style.left = (activeDraggable.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.removeEventListener("mouseup", closeDragElement);
+        document.removeEventListener("mousemove", elementDrag);
+        activeDraggable = null;
+      }
+        </script>
+      </div>
+    </div>
+
+    <div id="settings">
+      <p>Wybierz plik tła: </p>
+      <input type="file" id="fileName"><br>
+      <p>Wybierz wielkość: </p>
+      <p>X:<input type="number" id="width"></p>
+      <p>Y:<input type="number" id="height"></p>
+      <button type="button" onclick="draw();">Rysuj</button><br><br>
+      <script type="text/javascript">
+
+        function draw() {
+
+            var rows = document.getElementById("width").value;
+      			var columns = document.getElementById("height").value;
+      			var table = document.getElementById("tabl");
+
+
+    			// Wyczyszczenie tabeli, jeśli już istnieje
+    			while (table.firstChild) {
+    				table.removeChild(table.firstChild);
+    			}
+
+    			// Generowanie wierszy i kolumn
+    			for (var i = 0; i < rows; i++) {
+    				var row = document.createElement("tr");
+
+    				for (var j = 0; j < columns; j++) {
+    					var cell = document.createElement("td");
+    					row.appendChild(cell);
+    				}
+
+    				table.appendChild(row);
+    			}
+
+    		}
+      </script>
+      <br><br>
+    </div>
+  </body>
+</html>
