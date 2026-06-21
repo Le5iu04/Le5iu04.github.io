@@ -12,6 +12,29 @@
         text-align: center;
         min-height: 150%
       }
+
+      /* New CSS styles for Chess-like coordinates */
+      #tabl {
+        border-collapse: collapse;
+        margin: 20px auto;
+      }
+      #tabl td {
+        width: 50px;       /* Match this to your existing stylesheet cell width if needed */
+        height: 50px;      /* Match this to your existing stylesheet cell height if needed */
+        text-align: center;
+        vertical-align: middle;
+      }
+      .coordinate-label {
+        font-weight: bold;
+        color: #ffcc00;     /* Gold color to stand out on dark backgrounds */
+        font-size: 1.8em;
+        border: none !important; /* Removes cell border for labels */
+        background: transparent !important;
+      }
+      .corner-cell {
+        border: none !important;
+        background: transparent !important;
+      }
     </style>
     <link rel="stylesheet" href="../styl.css">
     <link rel="icon" href="../logo.png">
@@ -27,8 +50,7 @@
     <h1>Kreator Map</h1>
     <div id="grid">
       <table id="tabl">
-        <!--Efekt Skryptu-->
-      </table>
+        </table>
       <div id="icons">
         <i class="icon"><i class="fa-solid fa-skull"></i></i>
         <i class="icon"><i class="fa-solid fa-skull"></i></i>
@@ -68,42 +90,42 @@
         <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
         <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
         <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i><br><br>
-          <script>
-      var draggables = document.getElementsByClassName("icon");
-      var activeDraggable = null;
-      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        <script>
+          var draggables = document.getElementsByClassName("icon");
+          var activeDraggable = null;
+          var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
-      for (var i = 0; i < draggables.length; i++) {
-        draggables[i].addEventListener("mousedown", function(event) {
-          activeDraggable = this;
-          event = event || window.event;
-          event.preventDefault();
+          for (var i = 0; i < draggables.length; i++) {
+            draggables[i].addEventListener("mousedown", function(event) {
+              activeDraggable = this;
+              event = event || window.event;
+              event.preventDefault();
 
-          pos3 = event.clientX;
-          pos4 = event.clientY;
-          document.addEventListener("mouseup", closeDragElement);
-          document.addEventListener("mousemove", elementDrag);
-        });
-      }
+              pos3 = event.clientX;
+              pos4 = event.clientY;
+              document.addEventListener("mouseup", closeDragElement);
+              document.addEventListener("mousemove", elementDrag);
+            });
+          }
 
-      function elementDrag(event) {
-        event = event || window.event;
-        event.preventDefault();
+          function elementDrag(event) {
+            event = event || window.event;
+            event.preventDefault();
 
-        pos1 = pos3 - event.clientX;
-        pos2 = pos4 - event.clientY;
-        pos3 = event.clientX;
-        pos4 = event.clientY;
+            pos1 = pos3 - event.clientX;
+            pos2 = pos4 - event.clientY;
+            pos3 = event.clientX;
+            pos4 = event.clientY;
 
-        activeDraggable.style.top = (activeDraggable.offsetTop - pos2) + "px";
-        activeDraggable.style.left = (activeDraggable.offsetLeft - pos1) + "px";
-      }
+            activeDraggable.style.top = (activeDraggable.offsetTop - pos2) + "px";
+            activeDraggable.style.left = (activeDraggable.offsetLeft - pos1) + "px";
+          }
 
-      function closeDragElement() {
-        document.removeEventListener("mouseup", closeDragElement);
-        document.removeEventListener("mousemove", elementDrag);
-        activeDraggable = null;
-      }
+          function closeDragElement() {
+            document.removeEventListener("mouseup", closeDragElement);
+            document.removeEventListener("mousemove", elementDrag);
+            activeDraggable = null;
+          }
         </script>
       </div>
     </div>
@@ -115,33 +137,66 @@
       <p>X:<input type="number" id="width"></p>
       <p>Y:<input type="number" id="height"></p>
       <button type="button" onclick="draw();">Rysuj</button><br><br>
+
       <script type="text/javascript">
+        // Helper function to convert numeric column index to Excel-like alphabetical strings (A, B, C... Z, AA, AB...)
+        function getColLabel(index) {
+          let label = "";
+          while (index >= 0) {
+            label = String.fromCharCode((index % 26) + 65) + label;
+            index = Math.floor(index / 26) - 1;
+          }
+          return label;
+        }
 
         function draw() {
+          var rows = parseInt(document.getElementById("width").value);
+          var columns = parseInt(document.getElementById("height").value);
+          var table = document.getElementById("tabl");
 
-            var rows = document.getElementById("width").value;
-      			var columns = document.getElementById("height").value;
-      			var table = document.getElementById("tabl");
+          // Wyczyszczenie tabeli, jeśli już istnieje
+          while (table.firstChild) {
+            table.removeChild(table.firstChild);
+          }
 
+          if (isNaN(rows) || isNaN(columns) || rows <= 0 || columns <= 0) return;
 
-    			// Wyczyszczenie tabeli, jeśli już istnieje
-    			while (table.firstChild) {
-    				table.removeChild(table.firstChild);
-    			}
+          // 1. Create the Top Header Row (Letters)
+          var headerRow = document.createElement("tr");
 
-    			// Generowanie wierszy i kolumn
-    			for (var i = 0; i < rows; i++) {
-    				var row = document.createElement("tr");
+          // Blank corner cell (top-left)
+          var cornerCell = document.createElement("td");
+          cornerCell.className = "corner-cell";
+          headerRow.appendChild(cornerCell);
 
-    				for (var j = 0; j < columns; j++) {
-    					var cell = document.createElement("td");
-    					row.appendChild(cell);
-    				}
+          // Alphabet labels for each column
+          for (var j = 0; j < columns; j++) {
+            var cell = document.createElement("td");
+            cell.className = "coordinate-label";
+            cell.innerText = getColLabel(j);
+            headerRow.appendChild(cell);
+          }
+          table.appendChild(headerRow);
 
-    				table.appendChild(row);
-    			}
+          // 2. Generowanie wierszy z mapą i numerami bocznymi
+          for (var i = 0; i < rows; i++) {
+            var row = document.createElement("tr");
 
-    		}
+            // Left Sidebar cell (Numbers)
+            var numberCell = document.createElement("td");
+            numberCell.className = "coordinate-label";
+            numberCell.innerText = (i + 1);
+            row.appendChild(numberCell);
+
+            // Playable grid cells
+            for (var j = 0; j < columns; j++) {
+              var cell = document.createElement("td");
+              row.appendChild(cell);
+            }
+
+            table.appendChild(row);
+          }
+        }
       </script>
       <br><br>
     </div>
