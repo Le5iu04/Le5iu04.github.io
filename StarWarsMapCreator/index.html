@@ -2,7 +2,9 @@
 <html lang="pl">
   <head>
     <meta charset="utf-8">
+
     <title>Map Creator</title>
+
     <style media="screen">
       body {
         font-size: 170%;
@@ -10,195 +12,881 @@
         color: white;
         font-family: font1;
         text-align: center;
-        min-height: 150%
+        min-height: 150%;
       }
 
-      /* New CSS styles for Chess-like coordinates */
+      /* Chess-like coordinates */
       #tabl {
         border-collapse: collapse;
         margin: 20px auto;
       }
+
       #tabl td {
-        width: 50px;       /* Match this to your existing stylesheet cell width if needed */
-        height: 50px;      /* Match this to your existing stylesheet cell height if needed */
+        width: 50px;
+        height: 50px;
         text-align: center;
         vertical-align: middle;
       }
+
       .coordinate-label {
         font-weight: bold;
-        color: #ffcc00;     /* Gold color to stand out on dark backgrounds */
+        color: #ffcc00;
         font-size: 1.8em;
-        border: none !important; /* Removes cell border for labels */
+        border: none !important;
         background: transparent !important;
       }
+
       .corner-cell {
         border: none !important;
         background: transparent !important;
       }
+
+      /* Enemy token */
+      .enemy-token {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        min-width: 45px;
+        min-height: 45px;
+
+        cursor: grab;
+        user-select: none;
+      }
+
+      .enemy-token:active {
+        cursor: grabbing;
+      }
+
+      .enemy-symbol {
+        font-size: 1em;
+        line-height: 1em;
+      }
+
+      .enemy-name {
+        font-size: 0.55em;
+        font-weight: bold;
+        line-height: 1.1em;
+        margin-top: 2px;
+      }
     </style>
+
     <link rel="stylesheet" href="../styl.css">
     <link rel="icon" href="../logo.png">
     <link rel="shortcut icon" href="../logo.png">
-    <script src="https://kit.fontawesome.com/d243d02f19.js" crossorigin="anonymous"></script>
+
+    <script
+      src="https://kit.fontawesome.com/d243d02f19.js"
+      crossorigin="anonymous">
+    </script>
   </head>
+
   <body>
+
     <div id="nav">
-      <p><a href="../EarthdawnGenerator/index.html">Generatory</a></p>
-      <p><a href="../EarthdawnMapCreator/index.html">Kreator map</a></p>
-      <p><a href="../EarthdawnSoundboard/index.html">Soundboard</a></p>
+      <p>
+        <a href="../EarthdawnGenerator/index.html">
+          Generatory
+        </a>
+      </p>
+
+      <p>
+        <a href="../EarthdawnMapCreator/index.html">
+          Kreator map
+        </a>
+      </p>
+
+      <p>
+        <a href="../EarthdawnSoundboard/index.html">
+          Soundboard
+        </a>
+      </p>
     </div>
+
+
     <h1>Kreator Map</h1>
+
+
     <div id="grid">
+
       <table id="tabl">
-        </table>
+      </table>
+
+
       <div id="icons">
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
-        <i class="icon"><i class="fa-solid fa-skull"></i></i>
+
+        <!-- Enemy tokens will be generated here -->
+        <div id="enemyTokens"></div>
+
         <br><br>
+
+
+        <!-- Players -->
         <i class="icon">P1</i>
+
         <br><br>
+
         <i class="icon">P2</i>
+
         <br><br>
+
         <i class="icon">P3</i>
+
         <br><br>
-        <i class="icon">BN</i><i class="icon">BN</i><i class="icon">BN</i><i class="icon">BN</i><i class="icon">BN</i>
+
+
+        <!-- NPC tokens -->
+        <i class="icon">BN</i>
+        <i class="icon">BN</i>
+        <i class="icon">BN</i>
+        <i class="icon">BN</i>
+        <i class="icon">BN</i>
+
         <br><br>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i>
-        <i class="icon"><i class="fa-solid fa-square"></i></i><i class="icon"><i class="fa-solid fa-square"></i></i><br><br>
-        <script>
-          var draggables = document.getElementsByClassName("icon");
-          var activeDraggable = null;
-          var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
-          for (var i = 0; i < draggables.length; i++) {
-            draggables[i].addEventListener("mousedown", function(event) {
-              activeDraggable = this;
-              event = event || window.event;
-              event.preventDefault();
 
-              pos3 = event.clientX;
-              pos4 = event.clientY;
-              document.addEventListener("mouseup", closeDragElement);
-              document.addEventListener("mousemove", elementDrag);
-            });
-          }
+        <!-- Other square markers -->
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
 
-          function elementDrag(event) {
-            event = event || window.event;
-            event.preventDefault();
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
 
-            pos1 = pos3 - event.clientX;
-            pos2 = pos4 - event.clientY;
-            pos3 = event.clientX;
-            pos4 = event.clientY;
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
 
-            activeDraggable.style.top = (activeDraggable.offsetTop - pos2) + "px";
-            activeDraggable.style.left = (activeDraggable.offsetLeft - pos1) + "px";
-          }
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
 
-          function closeDragElement() {
-            document.removeEventListener("mouseup", closeDragElement);
-            document.removeEventListener("mousemove", elementDrag);
-            activeDraggable = null;
-          }
-        </script>
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <i class="icon">
+          <i class="fa-solid fa-square"></i>
+        </i>
+
+        <br><br>
+
       </div>
+
     </div>
+
 
     <div id="settings">
-      <p>Wybierz plik tła: </p>
-      <input type="file" id="fileName"><br>
-      <p>Wybierz wielkość: </p>
-      <p>X:<input type="number" id="width"></p>
-      <p>Y:<input type="number" id="height"></p>
-      <button type="button" onclick="draw();">Rysuj</button><br><br>
 
-      <script type="text/javascript">
-        // Helper function to convert numeric column index to Excel-like alphabetical strings (A, B, C... Z, AA, AB...)
-        function getColLabel(index) {
-          let label = "";
-          while (index >= 0) {
-            label = String.fromCharCode((index % 26) + 65) + label;
-            index = Math.floor(index / 26) - 1;
-          }
-          return label;
-        }
+      <p>Wybierz plik tła:</p>
 
-        function draw() {
-          var rows = parseInt(document.getElementById("width").value);
-          var columns = parseInt(document.getElementById("height").value);
-          var table = document.getElementById("tabl");
+      <input
+        type="file"
+        id="fileName"
+      >
 
-          // Wyczyszczenie tabeli, jeśli już istnieje
-          while (table.firstChild) {
-            table.removeChild(table.firstChild);
-          }
+      <br>
 
-          if (isNaN(rows) || isNaN(columns) || rows <= 0 || columns <= 0) return;
 
-          // 1. Create the Top Header Row (Letters)
-          var headerRow = document.createElement("tr");
+      <p>Wybierz wielkość:</p>
 
-          // Blank corner cell (top-left)
-          var cornerCell = document.createElement("td");
-          cornerCell.className = "corner-cell";
-          headerRow.appendChild(cornerCell);
+      <p>
+        X:
+        <input
+          type="number"
+          id="width"
+        >
+      </p>
 
-          // Alphabet labels for each column
-          for (var j = 0; j < columns; j++) {
-            var cell = document.createElement("td");
-            cell.className = "coordinate-label";
-            cell.innerText = getColLabel(j);
-            headerRow.appendChild(cell);
-          }
-          table.appendChild(headerRow);
+      <p>
+        Y:
+        <input
+          type="number"
+          id="height"
+        >
+      </p>
 
-          // 2. Generowanie wierszy z mapą i numerami bocznymi
-          for (var i = 0; i < rows; i++) {
-            var row = document.createElement("tr");
 
-            // Left Sidebar cell (Numbers)
-            var numberCell = document.createElement("td");
-            numberCell.className = "coordinate-label";
-            numberCell.innerText = (i + 1);
-            row.appendChild(numberCell);
+      <button
+        type="button"
+        onclick="draw();">
+        Rysuj
+      </button>
 
-            // Playable grid cells
-            for (var j = 0; j < columns; j++) {
-              var cell = document.createElement("td");
-              row.appendChild(cell);
-            }
-
-            table.appendChild(row);
-          }
-        }
-      </script>
       <br><br>
+
     </div>
+
+
+
+    <script>
+
+      /*
+       * ======================================
+       * ENEMY TOKENS
+       * ======================================
+       */
+
+      const ENEMY_COUNT = 10;
+
+
+      function createEnemyTokens() {
+
+        const container =
+          document.getElementById("enemyTokens");
+
+
+        for (let i = 1; i <= ENEMY_COUNT; i++) {
+
+          const enemy =
+            document.createElement("i");
+
+
+          enemy.className =
+            "icon enemy-token";
+
+
+          /*
+           * Store the enemy name directly
+           * on the HTML element.
+           */
+          enemy.dataset.enemyName = "E" + i;
+
+
+          /*
+           * Skull
+           */
+          const symbol =
+            document.createElement("span");
+
+          symbol.className =
+            "enemy-symbol";
+
+          symbol.innerHTML =
+            '<i class="fa-solid fa-skull"></i>';
+
+
+          /*
+           * Enemy ID / callsign
+           */
+          const name =
+            document.createElement("span");
+
+          name.className =
+            "enemy-name";
+
+          name.innerText =
+            enemy.dataset.enemyName;
+
+
+          enemy.appendChild(symbol);
+          enemy.appendChild(name);
+
+
+          /*
+           * Helpful tooltip
+           */
+          enemy.title =
+            "Podwójne kliknięcie zmienia nazwę";
+
+
+          /*
+           * Double-click to rename enemy.
+           *
+           * Examples:
+           *
+           * ST1
+           * ST2
+           * DR1
+           * BH1
+           * TR1
+           */
+          enemy.addEventListener(
+            "dblclick",
+            function(event) {
+
+              event.preventDefault();
+              event.stopPropagation();
+
+
+              const currentName =
+                this.dataset.enemyName;
+
+
+              let newName =
+                prompt(
+                  "Nazwa / oznaczenie przeciwnika:",
+                  currentName
+                );
+
+
+              /*
+               * Cancel was clicked.
+               */
+              if (newName === null) {
+                return;
+              }
+
+
+              /*
+               * Remove unnecessary spaces.
+               */
+              newName =
+                newName.trim();
+
+
+              /*
+               * Empty value = do nothing.
+               */
+              if (newName === "") {
+                return;
+              }
+
+
+              /*
+               * Keep the callsign reasonably short.
+               */
+              if (newName.length > 8) {
+                newName =
+                  newName.substring(0, 8);
+              }
+
+
+              /*
+               * Convert to uppercase.
+               *
+               * "st1" becomes "ST1"
+               */
+              newName =
+                newName.toUpperCase();
+
+
+              this.dataset.enemyName =
+                newName;
+
+
+              this.querySelector(
+                ".enemy-name"
+              ).innerText =
+                newName;
+            }
+          );
+
+
+          container.appendChild(enemy);
+        }
+      }
+
+
+
+      /*
+       * ======================================
+       * DRAGGING
+       * ======================================
+       */
+
+      let activeDraggable = null;
+
+      let pos1 = 0;
+      let pos2 = 0;
+      let pos3 = 0;
+      let pos4 = 0;
+
+
+
+      function initializeDragging() {
+
+        const draggables =
+          document.getElementsByClassName(
+            "icon"
+          );
+
+
+        for (
+          let i = 0;
+          i < draggables.length;
+          i++
+        ) {
+
+          draggables[i].addEventListener(
+            "mousedown",
+            startDragging
+          );
+        }
+      }
+
+
+
+      function startDragging(event) {
+
+        activeDraggable =
+          this;
+
+
+        event =
+          event || window.event;
+
+
+        event.preventDefault();
+
+
+        pos3 =
+          event.clientX;
+
+        pos4 =
+          event.clientY;
+
+
+        document.addEventListener(
+          "mouseup",
+          closeDragElement
+        );
+
+
+        document.addEventListener(
+          "mousemove",
+          elementDrag
+        );
+      }
+
+
+
+      function elementDrag(event) {
+
+        if (!activeDraggable) {
+          return;
+        }
+
+
+        event =
+          event || window.event;
+
+
+        event.preventDefault();
+
+
+        pos1 =
+          pos3 - event.clientX;
+
+        pos2 =
+          pos4 - event.clientY;
+
+
+        pos3 =
+          event.clientX;
+
+        pos4 =
+          event.clientY;
+
+
+        activeDraggable.style.top =
+          (
+            activeDraggable.offsetTop
+            - pos2
+          )
+          + "px";
+
+
+        activeDraggable.style.left =
+          (
+            activeDraggable.offsetLeft
+            - pos1
+          )
+          + "px";
+      }
+
+
+
+      function closeDragElement() {
+
+        document.removeEventListener(
+          "mouseup",
+          closeDragElement
+        );
+
+
+        document.removeEventListener(
+          "mousemove",
+          elementDrag
+        );
+
+
+        activeDraggable =
+          null;
+      }
+
+
+
+      /*
+       * ======================================
+       * GRID
+       * ======================================
+       */
+
+
+      /*
+       * Converts:
+       *
+       * 0  -> A
+       * 1  -> B
+       * 25 -> Z
+       * 26 -> AA
+       * 27 -> AB
+       */
+      function getColLabel(index) {
+
+        let label = "";
+
+
+        while (index >= 0) {
+
+          label =
+            String.fromCharCode(
+              (index % 26) + 65
+            )
+            + label;
+
+
+          index =
+            Math.floor(index / 26) - 1;
+        }
+
+
+        return label;
+      }
+
+
+
+      function draw() {
+
+        const rows =
+          parseInt(
+            document.getElementById(
+              "width"
+            ).value
+          );
+
+
+        const columns =
+          parseInt(
+            document.getElementById(
+              "height"
+            ).value
+          );
+
+
+        const table =
+          document.getElementById(
+            "tabl"
+          );
+
+
+        /*
+         * Clear previous grid.
+         */
+        while (table.firstChild) {
+
+          table.removeChild(
+            table.firstChild
+          );
+        }
+
+
+        /*
+         * Invalid map size.
+         */
+        if (
+          isNaN(rows)
+          ||
+          isNaN(columns)
+          ||
+          rows <= 0
+          ||
+          columns <= 0
+        ) {
+
+          return;
+        }
+
+
+
+        /*
+         * ======================================
+         * TOP COORDINATE ROW
+         * ======================================
+         */
+
+        const headerRow =
+          document.createElement(
+            "tr"
+          );
+
+
+        /*
+         * Empty top-left corner.
+         */
+        const cornerCell =
+          document.createElement(
+            "td"
+          );
+
+
+        cornerCell.className =
+          "corner-cell";
+
+
+        headerRow.appendChild(
+          cornerCell
+        );
+
+
+
+        /*
+         * A B C D E...
+         */
+        for (
+          let j = 0;
+          j < columns;
+          j++
+        ) {
+
+          const cell =
+            document.createElement(
+              "td"
+            );
+
+
+          cell.className =
+            "coordinate-label";
+
+
+          cell.innerText =
+            getColLabel(j);
+
+
+          headerRow.appendChild(
+            cell
+          );
+        }
+
+
+        table.appendChild(
+          headerRow
+        );
+
+
+
+        /*
+         * ======================================
+         * PLAYABLE GRID
+         * ======================================
+         */
+
+        for (
+          let i = 0;
+          i < rows;
+          i++
+        ) {
+
+          const row =
+            document.createElement(
+              "tr"
+            );
+
+
+          /*
+           * Row number.
+           */
+          const numberCell =
+            document.createElement(
+              "td"
+            );
+
+
+          numberCell.className =
+            "coordinate-label";
+
+
+          numberCell.innerText =
+            i + 1;
+
+
+          row.appendChild(
+            numberCell
+          );
+
+
+
+          /*
+           * Playable squares.
+           */
+          for (
+            let j = 0;
+            j < columns;
+            j++
+          ) {
+
+            const cell =
+              document.createElement(
+                "td"
+              );
+
+
+            row.appendChild(
+              cell
+            );
+          }
+
+
+          table.appendChild(
+            row
+          );
+        }
+      }
+
+
+
+      /*
+       * ======================================
+       * STARTUP
+       * ======================================
+       */
+
+      createEnemyTokens();
+
+      initializeDragging();
+
+    </script>
+
   </body>
 </html>
